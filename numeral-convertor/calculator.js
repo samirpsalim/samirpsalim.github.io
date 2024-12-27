@@ -1,6 +1,6 @@
 function GetChineseNumber()
 {
-    var number= document.getElementById("input").innerHTML;
-    document.getElementById("output").innerHTML = number;
+    var number= document.getElementById("input").value;
+    document.getElementById("output").value = number;
     document.getElementById("output").style.display="block";
 }
