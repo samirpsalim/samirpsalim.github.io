@@ -1,5 +1,20 @@
 var chars= "一二三四五六七八九十";
 
+window.onload =function()
+{
+    var input = document.getElementById("input");
+
+    input.addEventListener("keypress", function(event) {
+
+    if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        document.getElementById("submitter").click();
+    }
+    });
+}
+
 function GetChineseNumber()
 {
     var number= document.getElementById("input").value;

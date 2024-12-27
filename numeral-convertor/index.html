@@ -7,12 +7,10 @@
     <title>Regular numeral to Chinese numeral convertor</title>
 </head>
 <body>
-    <p>This is intended to work from 1-99 at the moment. The characters used are intended as Traditional Chinese characters.
-        The function is triggered only when the "CALCULATE" button is triggered due to the limits of github pages.
-        </p>
+    <p>This is intended to work from 1-99 at the moment. The characters used are intended as Traditional Chinese characters.</p>
     <label>Regular numeral (eg:15)</label>
     <input type="text" id="input">
-    <button type="button" onclick="GetChineseNumber()">CALCULATE</button>
+    <button type="button"  id="submitter" onclick="GetChineseNumber()">CALCULATE</button>
     <hr>
     <input type="text" disabled style="display: none;" id="output">
 </body>
