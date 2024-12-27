@@ -14,7 +14,7 @@ function convertToChinese(number)
     if(number<=0) return "Input out of bounds";
     if(number<=10 && number>0) return GetChineseCharacter(number);
     else if(number<20) return GetChineseCharacter(10)+GetChineseCharacter(number-10);
-    else if(number<99) return GetChineseCharacter(Math.floor(number/10))+GetChineseCharacter(10)+GetChineseCharacter(number%10);
+    else if(number<100) return GetChineseCharacter(Math.floor(number/10))+GetChineseCharacter(10)+GetChineseCharacter(number%10);
     return "Input out of bounds";
 }
 
