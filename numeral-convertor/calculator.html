@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="calculator.js"></script>
+    <script type="text/javascript" src="operator.js"></script>
+    <title>Calculator with result in traditional Chinese</title>
+</head>
+<body>
+    <p>This is intended to work from 1-99(both input and results) at the moment. 
+        The characters used are intended as Traditional Chinese characters.</p>
+    <label>Regular numeral (eg:15)</label>
+    <input type="text" id="input1">
+    <select id="operator">
+        <option>+</option>
+        <option>-</option>
+    </select>
+    <input type="text" id="input2">
+    <button type="button"  id="submitter" onclick="CalculateResults()">CALCULATE</button>
+    <hr>
+    <input type="text" disabled style="display: none;" id="output">
+</body>
+</html>
