@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>
+SIR 2026: A Reflection on Malayalam Fonts and Encoding
+</title>
+</head>
+<body>
+<h1>SIR 2026: A Reflection on Malayalam Fonts and Encoding</h1>
+<sub>Posted on 21 Feb 2026</sub>
+<p>
+The revised voter list in Kerala, following the 2026 SIR process, was released today. I happened to have the opportunity to volunteer for this. During the process, I came across the voter search web page hosted on the CEO Kerala website. It taught me a few things about fonts and encodings and stimulated my thoughts about them.
+</p>
+<ol>
+<li>
+<h2>Older Malayalam fonts like FML-Revathi map Malayalam glyphs onto ASCII codepoints instead of using Unicode. </h2>
+<p>
+This is how I realized this fact:
+</p>
+<p>
+I tried to search for a name by typing it in Malayalam Unicode after opening the Ctrl+F search bar. Nothing showed up. I tried copying a similar name and pasting it into the search bar. I got some strange sequence of English characters. I decided to dig in further to figure out what was going on. I clicked the Inspect tab and figured out that all of them used CSS classes called 'karthika-text' or 'karthika-text-small'. Both CSS classes had the property font-family set to 'FML-Revathi'.  The font face was defined as follows:
+</p>
+<code><pre>
+    @font-face {
+        font-family: 'FML-Revathi';
+        src: url('https://www.ceo.kerala.gov.in/fonts/463a187467f21c22037f93ea4e5d4bfa.eot');
+        src: url('https://www.ceo.kerala.gov.in/fonts/463a187467f21c22037f93ea4e5d4bfa.eot#iefix') format('embedded-opentype'),
+            url('https://www.ceo.kerala.gov.in/fonts/463a187467f21c22037f93ea4e5d4bfa.woff') format('woff'),
+            url('https://www.ceo.kerala.gov.in/fonts/463a187467f21c22037f93ea4e5d4bfa.woff2') format('woff2'),
+            url('https://www.ceo.kerala.gov.in/fonts/463a187467f21c22037f93ea4e5d4bfa.ttf') format('truetype'),
+            url('https://www.ceo.kerala.gov.in/fonts/463a187467f21c22037f93ea4e5d4bfa.svg#FML-Revathi') format('svg');
+    }
+</pre></code>
+<p>
+Among these files, I could find the woff file in the Sources panel. The DevTools preview showed Malayalam glyphs occupying the positions where I would normally expect Latin characters. They were roughly in alphabetical order too. However, some letters were missing, eg: ഓ and ഔ. This could be because those letters can be visually formed by combining glyphs that already exist in the font. As you can see, in this case, the left part is identical in both these letters. It also exists as a standalone letter, while the right halves exist as separate vowel diacritics. There were 6 other letters that were still missing(ധ-ഭ). On reloading, the DevTools viewer displayed A–Z and a–z instead of the Malayalam glyph previews. This revealed that the font was mapping those ASCII codepoints to Malayalam glyphs. That also accounted for the missing letters. The capital letters A-Z take up ASCII code points 65-90 while the small letters a-z take up code points 97-122. There are exactly 6 code points in between. I also realized that this is just a font switching issue since the Roboto-Light font woff file preview also reverted to that same fallback English A–Z display instead of showing its own glyph set. 
+</p>
+<p>
+I was initially genuinely impressed by the idea that Malayalam glyphs could be represented this way. However, on further thought, it is not really that unique. Microsoft itself manipulated the ASCII mapping to represent icons when they made Wingdings.
+</p>
+</li>
+<li>
+<h2>The same key on the keyboard can map to different characters based on the input method set by the system.  </h2>
+<p>
+After discovering the fact that the mapping was in a bit of alphabetical order, I assumed that it applied to typing too. Eg: A should be അ and B should be ആ. I asked my mother who knows Malayalam typing if this was the case. It was not. What you type is not what you get as the final representation.
+</p>
+<p>
+Thinking of it, it makes a lot of sense. It would be confusing if ഓ and ഔ required multiple keystrokes to be entered. Also, this behavior is not unique. Even Unicode-based Malayalam fonts map to a different code point in the Unicode space. What made the fonts I was looking at confusing was that the mapping was jumbled within the ASCII space. 
+</p>
+</li>
+</ol>
+</body>
+</html>
